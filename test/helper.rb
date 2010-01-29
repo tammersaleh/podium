@@ -6,10 +6,16 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'podium'
 
-# require 'fakefs'
-
 class Test::Unit::TestCase
+  def self.presentations_path
+		File.join(File.dirname(__FILE__), "example_presentations")
+  end
+
+  def self.presentation_path(name)
+		File.join(presentations_path, name)
+  end
+
   def presentation_path(name)
-		File.join(File.dirname(__FILE__), "example_presentations", name)
+    self.class.presentation_path(name)
   end
 end

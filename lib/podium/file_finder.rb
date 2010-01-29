@@ -5,6 +5,21 @@ class FileFinder
     self.presentation_directory = directory
   end
 
+  def slides
+    slide_files.inject([]) do |slides, file|
+      slides += slides_for_file(file)
+    end
+  end
+
+  def file_list(dir)
+    explicit_file_list_file = File.join(dir, "file_list.txt")
+    if File.exists?(explicit_file_list_file)
+      File.read(explicit_file_list_file).map { |filename| File.join(dir, filename.strip) }
+    else
+      Dir[File.join(dir, "*")]
+    end
+  end
+
   def slide_files(dir = nil)
     dir ||= self.presentation_directory
 
@@ -23,22 +38,8 @@ class FileFinder
     return files
   end
 
-  def file_list(dir)
-    explicit_file_list_file = File.join(dir, "file_list.txt")
-    if File.exists?(explicit_file_list_file)
-      File.read(explicit_file_list_file).map { |filename| File.join(dir, filename.strip) }
-    else
-      Dir[File.join(dir, "*")]
-    end
-  end
-
   def slides_for_file(file)
     Slide.collection_from_text(File.read(file))
   end
 
-  def slides
-    slide_files.inject([]) do |slides, file|
-      slides += slides_for_file(file)
-    end
-  end
 end
