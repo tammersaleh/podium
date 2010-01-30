@@ -1,6 +1,6 @@
 require 'active_support'
 require 'podium/slide'
-require 'podium/presenter'
+require 'podium/formatter'
 require 'podium/file_finder'
 
 class Podium
@@ -28,7 +28,7 @@ class Podium
   end
 
   def slides_text
-    slides.map { |slide| Presenter.new(slide).to_html }.join
+    slides.map { |slide| Formatter.new(slide).to_html }.join
   end
 
   def output_slide_file

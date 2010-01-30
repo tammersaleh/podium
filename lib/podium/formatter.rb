@@ -1,6 +1,6 @@
 require 'redcloth'
 
-class Presenter
+class Formatter
   attr_accessor :slide
 
   def self.recognize_filename?(filename)

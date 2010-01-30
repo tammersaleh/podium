@@ -34,7 +34,7 @@ class FileFinder
 
       if File.directory?(file_or_directory)
         files += slide_files(file_or_directory)
-      elsif Presenter.recognize_filename?(file_or_directory)
+      elsif Formatter.recognize_filename?(file_or_directory)
         files << file_or_directory
       end
     end
