@@ -1,12 +1,15 @@
 class Slide
+  DELIMITER="!SLIDE"
+
   mattr_accessor :total_slides
   self.total_slides = 1
-  attr_accessor :body, :meta, :number, :format
 
-  def self.collection_from_text(text)
-    text.split("!SLIDE").reject(&:blank?).inject([]) do |array, section_body|
-      array << Slide.new(:meta => extract_metadata!(section_body), 
-                         :body => section_body.strip)
+  attr_accessor :body, :meta, :number, :format, :source_file
+
+  def self.collection_from_text(text, opts = {})
+    text.split(DELIMITER).reject(&:blank?).inject([]) do |array, section_body|
+      array << Slide.new(opts.merge(:meta => extract_metadata!(section_body), 
+                                    :body => section_body.strip))
     end
   end
 
@@ -27,10 +30,11 @@ class Slide
   end
 
   def initialize(opts = {})
-    self.body   = opts[:body]
-    self.format = opts[:format]
-    self.meta   = opts[:meta] || []
-    self.number = opts[:number] || self.class.next_slide_number
+    self.body        = opts[:body]
+    self.format      = opts[:format]
+    self.source_file = opts[:source_file]
+    self.meta        = opts[:meta] || []
+    self.number      = opts[:number] || self.class.next_slide_number
   end
 
   def ==(other)

@@ -33,6 +33,14 @@ class TestFileFinder < Test::Unit::TestCase
 				            Slide.new(:body => "four")], 
 									 @file_finder.slides
 		end
+
+    should "record the source filename on the slide" do
+			assert_equal %w(first.md
+                      subdir/second.md
+                      subdir/subsubdir/third.md
+                      z_fourth.md), 
+									 @file_finder.slides.map(&:source_file)
+    end
 	end
 
 	context "a new file finder for a nested presentation with slide_list.txt files" do
@@ -52,4 +60,27 @@ class TestFileFinder < Test::Unit::TestCase
 									 @file_finder.slides
 		end
 	end
+
+	context "a new file finder for a nested presentation with assets" do
+		setup do
+			@file_finder = FileFinder.new(presentation_path("nested_with_assets"))
+		end
+
+		should "find the files" do
+			assert_equal %w(one.md two.md), 
+				           @file_finder.slide_files.map {|f| File.basename f }
+		end
+	end
+
+  %w(assets shared . ..).each do |directory_name|
+    should "know to ignore #{directory_name} directories" do
+      assert FileFinder.new("foo").ignore?(directory_name)
+    end
+  end
+
+  %w(foo bar).each do |directory_name|
+    should "know to not ignore #{directory_name} directories" do
+      assert !FileFinder.new("foo").ignore?(directory_name)
+    end
+  end
 end

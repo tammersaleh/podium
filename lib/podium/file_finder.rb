@@ -5,6 +5,10 @@ class FileFinder
     self.presentation_directory = directory
   end
 
+  def ignore?(filename)
+    %w(assets shared . ..).include?(filename)
+  end
+
   def slides
     slide_files.inject([]) do |slides, file|
       slides += slides_for_file(file)
@@ -26,11 +30,11 @@ class FileFinder
     files = []
 
     file_list(dir).each do |file_or_directory| 
-      next if %w(. ..).include?(File.basename(file_or_directory))
+      next if ignore?(File.basename(file_or_directory))
 
       if File.directory?(file_or_directory)
         files += slide_files(file_or_directory)
-      else
+      elsif Presenter.recognize_filename?(file_or_directory)
         files << file_or_directory
       end
     end
@@ -39,7 +43,8 @@ class FileFinder
   end
 
   def slides_for_file(file)
-    Slide.collection_from_text(File.read(file))
+    relative_file_path = file.sub(presentation_directory, '')
+    relative_file_path.sub!(%r{^/}, '')
+    Slide.collection_from_text(File.read(file), :source_file => relative_file_path)
   end
-
 end
