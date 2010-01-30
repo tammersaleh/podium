@@ -7,7 +7,7 @@ class TestPodium < Test::Unit::TestCase
       setup do 
         @outdir = "/tmp/podium-test-outdir/#{dir}"
         FileUtils.rm_rf @outdir
-        Podium.create(presentation_path(dir), @outdir)
+        Podium.new(presentation_path(dir), @outdir).create!
       end
 
       should "create a slides.html file under the output directory" do
