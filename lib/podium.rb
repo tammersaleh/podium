@@ -1,7 +1,9 @@
 require 'active_support'
+require 'haml'
 require 'podium/slide'
 require 'podium/formatter'
 require 'podium/file_finder'
+require 'podium/presentation'
 
 class Podium
   attr_accessor :in_dir, :out_dir
@@ -15,7 +17,7 @@ class Podium
     make_out_dir!
 
     File.open(output_slide_file, "w+") do |file|
-      file << slides_text
+      file << presentation.to_html
     end
   end
 
@@ -27,8 +29,8 @@ class Podium
     FileFinder.new(in_dir).slides
   end
 
-  def slides_text
-    slides.map { |slide| Formatter.new(slide).to_html }.join
+  def presentation
+    Presentation.new(slides)
   end
 
   def output_slide_file
