@@ -1,7 +1,0 @@
-!SLIDE
-
-one
-
-!SLIDE
-
-two

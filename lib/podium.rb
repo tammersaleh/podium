@@ -1,39 +1,22 @@
-require 'active_support'
+#!/usr/bin/env ruby
+
 require 'haml'
-require 'podium/slide'
-require 'podium/formatter'
-require 'podium/file_finder'
-require 'podium/presentation'
+require 'sass'
 
-class Podium
-  attr_accessor :in_dir, :out_dir
+$LOAD_PATH << File.join(File.dirname(__FILE__))
+require "podium/haml_filters"
+require "podium/helpers"
+require "podium/commands"
 
-  def initialize(presentation_directory, output_directory)
-    self.in_dir = presentation_directory
-    self.out_dir = output_directory
-  end
+command = ARGV.shift
 
-  def create!
-    make_out_dir!
-
-    File.open(output_slide_file, "w+") do |file|
-      file << presentation.to_html
-    end
-  end
-
-  def make_out_dir!
-    FileUtils.mkdir_p(out_dir)
-  end
-
-  def haml_slides
-    FileFinder.new(in_dir).content
-  end
-
-  def presentation
-    Presentation.new(haml_slides)
-  end
-
-  def output_slide_file
-    File.join(out_dir, "slides.html")
-  end
+case command
+when "new":   
+  Podium::Commands::New.new(*ARGV)
+  Podium::Commands::Build.new(File.join(ARGV.first, "index.haml"))
+when "build": 
+  Podium::Commands::Build.new(*ARGV)
+else
+  raise "Unrecognized command: #{command}."
 end
+
