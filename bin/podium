@@ -8,7 +8,7 @@ command = ARGV.shift
 case command
 when "new":   
   Podium::Commands::New.new(*ARGV)
-  Podium::Commands::Build.new(File.join(ARGV.first, "index.haml"))
+  Podium::Commands::Build.new(File.join(ARGV.first, "index.html.haml"))
 when "build": 
   Podium::Commands::Build.new(*ARGV)
 else

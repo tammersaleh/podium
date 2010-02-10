@@ -13,7 +13,7 @@ module Podium
           FileUtils.cd dir
 
           File.open(outfile, "w+") do |body|
-            body << render("layout") do
+            body << render("layout.html") do
               render(File.basename(source_file, ".*"))
             end
           end
