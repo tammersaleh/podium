@@ -1,7 +1,7 @@
 module RubyCode
   include Haml::Filters::Base
   def render(text)
-    "<pre><code class='ruby'>" + Haml::Helpers.preserve(text) + "</code></pre>"
+    "<pre><code class='ruby'>" + Haml::Helpers.html_escape(text) + "</code></pre>"
   end
 
   def compile(precompiler, text)
@@ -18,7 +18,7 @@ end
 module Code
   include Haml::Filters::Base
   def render(text)
-    "<pre><code>" + Haml::Helpers.preserve(text) + "</code></pre>"
+    "<pre><code>" + Haml::Helpers.html_escape(text) + "</code></pre>"
   end
   def compile(precompiler, text)
     resolve_lazy_requires
