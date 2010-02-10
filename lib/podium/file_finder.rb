@@ -10,8 +10,8 @@ class FileFinder
   end
 
   def slides
-    slide_files.inject([]) do |slides, file|
-      slides += slides_for_file(file)
+    slide_files.inject("") do |total_content, file|
+      total_content += content_for_file(file)
     end
   end
 
@@ -42,9 +42,13 @@ class FileFinder
     return files
   end
 
-  def slides_for_file(file)
-    relative_file_path = file.sub(presentation_directory, '')
-    relative_file_path.sub!(%r{^/}, '')
-    Slide.collection_from_text(File.read(file), :source_file => relative_file_path)
+  def content_for_file(file)
+    read(file)
   end
+
+  # def slides_for_file(file)
+  #   relative_file_path = file.sub(presentation_directory, '')
+  #   relative_file_path.sub!(%r{^/}, '')
+  #   Slide.collection_from_text(File.read(file), :source_file => relative_file_path)
+  # end
 end

@@ -25,12 +25,12 @@ class Podium
     FileUtils.mkdir_p(out_dir)
   end
 
-  def slides
-    FileFinder.new(in_dir).slides
+  def haml_slides
+    FileFinder.new(in_dir).content
   end
 
   def presentation
-    Presentation.new(slides)
+    Presentation.new(haml_slides)
   end
 
   def output_slide_file
