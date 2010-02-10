@@ -6,15 +6,15 @@ module Podium
       def initialize(*source_files)
         source_files.each do |source_file|
           dir      = File.dirname(source_file)
-          outfile  = File.basename(source_file, ".*") + ".html"
+          outfile  = File.basename(source_file, ".haml")
 
           Dir["#{dir}/css/*.sass"].each {|f| generate_sass_file(f) }
 
           FileUtils.cd dir
 
           File.open(outfile, "w+") do |body|
-            body << render("layout.html") do
-              render(File.basename(source_file, ".*"))
+            body << render("layout") do
+              render(File.basename(source_file, ".html.haml"))
             end
           end
         end

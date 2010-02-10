@@ -13,7 +13,7 @@ module Podium
     end
 
     def render(filename, &block)
-      Haml::Engine.new(File.read(filename + ".haml")).render(binding, &block)
+      Haml::Engine.new(File.read(filename + ".html.haml")).render(binding, &block)
     end
   end
 end
