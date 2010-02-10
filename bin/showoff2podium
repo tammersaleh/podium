@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+while line = gets do
+  line.gsub!(/^(#+)/)        {|match| "%h#{match.size}" }
+  line.gsub!(/^(\*)/,                 ".inc")
+  line.gsub!(/^([^ ])/,               '  \1')
+  line.gsub!(/    @@@.*ruby/,         "  :rubycode")
+  line.gsub!(/    @@@.*/,             "  :code")
+  line.gsub!(/  !SLIDE(.*)/) {|match| ".slide#{$1.rstrip.gsub(" ", ".")}" }
+  puts line
+end
+
