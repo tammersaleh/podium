@@ -8,15 +8,3 @@ require "podium/haml_filters"
 require "podium/helpers"
 require "podium/commands"
 
-command = ARGV.shift
-
-case command
-when "new":   
-  Podium::Commands::New.new(*ARGV)
-  Podium::Commands::Build.new(File.join(ARGV.first, "index.haml"))
-when "build": 
-  Podium::Commands::Build.new(*ARGV)
-else
-  raise "Unrecognized command: #{command}."
-end
-
