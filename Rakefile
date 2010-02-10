@@ -5,13 +5,12 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "podium"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{foo}
+    gem.summary = %Q{HAML and JS based presentation system.}
+    gem.description = %Q{HAML and JS based presentation system.}
     gem.email = "tsaleh@gmail.com"
     gem.homepage = "http://github.com/tsaleh/podium"
     gem.authors = ["tsaleh"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    gem.add_development_dependency "yard", ">= 0"
+    gem.add_dependency 'haml', '>= 2.2.0'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
