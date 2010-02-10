@@ -5,15 +5,14 @@
 
 Gem::Specification.new do |s|
   s.name = %q{podium}
-  s.version = "0.0.2"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["tsaleh"]
   s.date = %q{2010-02-10}
-  s.default_executable = %q{podium}
   s.description = %q{HAML and JS based presentation system.}
   s.email = %q{tsaleh@gmail.com}
-  s.executables = ["podium"]
+  s.executables = ["podium", "showoff2podium"]
   s.extra_rdoc_files = [
     "LICENSE",
      "README.rdoc"
@@ -26,6 +25,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "bin/podium",
+     "bin/showoff2podium",
      "lib/podium.rb",
      "lib/podium/commands.rb",
      "lib/podium/haml_filters.rb",
