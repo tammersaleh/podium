@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{podium}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["tsaleh"]
-  s.date = %q{2010-02-10}
+  s.date = %q{2010-02-18}
   s.description = %q{HAML and JS based presentation system.}
   s.email = %q{tsaleh@gmail.com}
   s.executables = ["podium", "showoff2podium"]
