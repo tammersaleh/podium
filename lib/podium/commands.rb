@@ -11,8 +11,8 @@ module Podium
           FileUtils.cd dir
 
           File.open(outfile, "w+") do |body|
-            body << render("podium/layout") do
-              render(File.basename(source_file, ".html.haml"))
+            body << Haml::Engine.new(File.read("podium/layout.html.haml")).render(binding) do
+              Haml::Engine.new(File.read(source_file)).render(binding)
             end
           end
         end

@@ -17,47 +17,6 @@
   display: block;
 }
 
-#thumbnails {
-  margin: 0;
-  padding: 0;
-  width: 1020px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#thumbnails .slide {
-  width: 200px;
-  height: 200px;
-  float: left;
-  overflow: hidden;
-  border: 1px solid grey;
-  margin: 1px;
-}
-
-#thumbnails .slide.current {
-  border: 2px solid red;
-  margin: 0px;
-}
-
-#thumbnails .hover {
-  border: 2px solid black;
-  margin: 0px;
-}
-
-#thumbnails .slide * {
-  font-size: 100%;
-  padding: 0 0 0 0;
-  margin: 0 0 0 0;
-}
-
-#thumbnails .slide h1 {
-  font-size: 130%;
-}
-
-#thumbnails .inc {
-  display: block;
-}
-
 .inc {
   display: none;
 }
@@ -199,3 +158,63 @@ table td {
   vertical-align: top;
 }
 
+/* Thumbnails */
+
+#thumbnails {
+  margin: 0;
+  padding: 0;
+  width: 1020px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#thumbnails .slide {
+  width: 200px;
+  height: 200px;
+  float: left;
+  overflow: hidden;
+  border: 1px solid grey;
+  margin: 1px;
+}
+
+#thumbnails .slide.current {
+  border: 2px solid red;
+  margin: 0px;
+}
+
+#thumbnails .hover {
+  border: 2px solid black;
+  margin: 0px;
+}
+
+#thumbnails .slide * {
+  font-size: 100%;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+
+#thumbnails .slide h1 {
+  font-size: 130%;
+}
+
+#thumbnails .inc {
+  display: block;
+}
+
+/* Sections */
+
+#sections {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 2em;
+  list-style: none;
+}
+
+#sections .hover {
+  background: yellow;
+}
+
+#sections .current {
+  font-weight: bold;
+}
