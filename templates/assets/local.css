@@ -1,0 +1,42 @@
+.section {
+  background: #008;
+}
+.section h1, .section h2, .section h3, .section h4 {
+  color: yellow;
+}
+
+.subsection h1, .subsection h2, .subsection h3, .subsection h4 {
+  background: yellow;
+  color: black;
+}
+
+.unfinished {
+  background: #222;
+  color: #888;
+}
+
+table th {
+  border-bottom: 5px solid gray;
+}
+
+table td {
+  border-bottom: 1px solid gray;
+}
+
+table {
+  font-size: 2em;
+  margin-left: auto;
+  margin-right: auto;
+}
+table th {
+  text-align: left;
+  padding-right: 2em;
+  border-bottom: 5px solid gray;
+  vertical-align: top;
+}
+table td {
+  padding-right: 2em;
+  vertical-align: top;
+  border-bottom: 1px solid gray;
+}
+

@@ -47,7 +47,7 @@ function focusSlide($slide) {
 
 function next() {
   if ($("#slides .current .inc:hidden").length > 0) {
-    $("#slides .current .inc:hidden").first().show();
+    $("#slides .current .inc:hidden").first().show("fast");
   } else {
     focusSlide($("#slides .current").next());
   }

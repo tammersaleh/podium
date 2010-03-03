@@ -1,17 +1,35 @@
+.slide.section
+
+  %h1 This is a section
+
 .slide.subsection
 
-  %h1 My First Presentation!
+  %h1 This is a subsection
 
 .slide
 
+  %h1 Some Code
+
   :rubycode
     def Foo
-      bar
+      bar # This is :rubycode
     end
 
-.slide.bullets
+  :code
+    This is just :code
+
+.slide
+
+  %h3 Anything with .inc will show up incrementally.
 
   %ul
     %li.inc One
     %li.inc Two
     %li.inc Three
+
+.slide
+
+  %h2 Suspenders!
+
+  = image "suspenders.png", :height => "50%"
+
