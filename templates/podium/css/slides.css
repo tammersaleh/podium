@@ -175,6 +175,8 @@ table td {
   overflow: hidden;
   border: 1px solid grey;
   margin: 1px;
+  -webkit-border-radius: 10px;
+  -webkit-box-shadow: 0 0 5px gray;
 }
 
 #thumbnails .slide.current {
@@ -185,6 +187,7 @@ table td {
 #thumbnails .hover {
   border: 2px solid black;
   margin: 0px;
+  -webkit-box-shadow: 0 0 20px black;
 }
 
 #thumbnails .slide * {

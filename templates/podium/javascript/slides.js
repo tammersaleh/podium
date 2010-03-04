@@ -1,21 +1,33 @@
-$(function() { Podium.setup(); });
+$(function() { 
+  var podium = new Podium(); 
+  podium.initialize();
+});
 
-Podium = {
-  setup: function() {
-    Thumbnails.setup();
-    Sections.setup();
-    Slides.focusFirst();
-    document.onkeydown = Podium.keyDown;
-  },
+function Podium() {
+  var self = this;
 
-  hideAll: function() {
+  self.initialize = function() {
+    self.sections   = new Sections(self);
+    self.slides     = new Slides(self);
+    self.thumbnails = new Thumbnails(self);
+    self.notes      = new Notes(self);
+
+    self.sections.initialize();
+    self.thumbnails.initialize();
+    self.notes.initialize();
+    self.slides.initialize();
+
+    document.onkeydown = self.keyDown;
+  };
+
+  self.hideAll = function() {
     $('#thumbnails').hide();
     $('#sections').hide();
     $('#slides').hide();
-  },
+  };
 
   //  See e.g. http://www.quirksmode.org/js/events/keys.html for keycodes
-  keyDown: function(event)
+  self.keyDown = function(event)
   {
     var key = event.keyCode;
 
@@ -25,104 +37,116 @@ Podium = {
     console.log('key: ' + key)
 
     if (key == 32 || key == 39 || key == 40) { 
-      Slides.next();
+      self.slides.next();
     } else if (key == 37 || key == 38) { 
-      Slides.prev();
+      self.slides.prev();
     } else if (key == 67) { 
-      Thumbnails.toggle();
+      self.thumbnails.toggle();
     } else if (key == 83) { 
-      Sections.toggle();
+      self.sections.toggle();
     } else if (key == 27) { 
-      Slides.show();
+      self.slides.show();
     } else {
       return true;
     }
     return false 
-  },
+  };
 };
 
-Slides = {
-  show: function() {
-    Podium.hideAll();
-    $('#slides').show();
-  },
+function Slides(podium_reference) {
+  var self = this;
+  self.podium = podium_reference;
 
-  focusFirst: function() {
+  self.initialize = function() {
+    self.focusFirst();
+  };
+
+  self.show = function() {
+    self.podium.hideAll();
+    $('#slides').show();
+  };
+
+  self.focusFirst = function() {
     var hash = window.location.hash;
     var number = 0;
     if (hash != "") { number = hash.split("_")[1]; }
-    Slides.focus($("#slides .slide").eq(number));
-  },
+    self.focus($("#slides .slide").eq(number));
+  };
 
-  focus: function focus($slide) {
+  self.focus = function($slide) {
     if ($slide.first().hasClass("slide")) {
-      window.location.hash = Slides.hash($slide);
+      window.location.hash = self.hash($slide);
 
       $("#slides .slide").removeClass("current");
-      $("#thumbnails .slide").removeClass("current");
-      $("#sections .section").removeClass("current");
 
       $slide.addClass("current");
 
-      Sections.setCurrent();
-      Thumbnails.setCurrent();
-      Slides.center();
+      self.podium.sections.setCurrent();
+      self.podium.thumbnails.setCurrent();
+      self.center();
     };
-  },
+  };
 
-  hash: function($slide) {
+  self.hash = function($slide) {
     return "#slide_" + $("#slides .slide").index($slide);
-  },
+  };
 
-  next: function() {
+  self.next = function() {
     if ($("#slides .current .inc:hidden").length > 0) {
       $("#slides .current .inc:hidden").first().show("fast");
     } else {
-      Slides.focus($("#slides .current").next());
+      self.focus($("#slides .current").next());
     }
-  },
+  };
 
-  prev: function() {
-    Slides.focus($("#slides .current").prev());
-  },
+  self.prev = function() {
+    self.focus($("#slides .current").prev());
+  };
 
-  center: function() {
+  self.center = function() {
     var slide_height = $("#slides .current").height()
     var top = (0.5 * parseFloat($("#slides").height())) - (0.5 * parseFloat(slide_height))
     $("#slides .current").css('padding-top', top)
     $("#slides .current").css('padding-bottom', top)
-  },
+  };
 };
 
-Thumbnails = {
-  setup: function() {
+function Thumbnails(podium_reference) {
+  var self = this;
+  self.podium = podium_reference;
+
+  self.initialize = function() {
     $('<div id="thumbnails"></div>').html($("#slides").html()).appendTo("body");
     $('#thumbnails .slide').hover(function() { $(this).addClass("hover")   }, 
                                   function() { $(this).removeClass("hover")});
     $('#thumbnails .slide').click(function() { 
-      Slides.focus($("#slides .slide").eq($("#thumbnails .slide").index($(this))));
-      Thumbnails.toggle();
+      self.podium.slides.focus($("#slides .slide").eq($("#thumbnails .slide").index($(this))));
+      self.toggle();
     });
-    Thumbnails.toggle();
-  },
+    self.toggle();
+  };
 
-  toggle: function() {
+  self.toggle = function() {
     if ($('#thumbnails').is(':visible')) {
-      Slides.show();
+      self.podium.slides.show();
     } else {
-      Podium.hideAll();
+      self.podium.hideAll();
       $('#thumbnails').show();
     }
-  },
+  };
 
-  setCurrent: function() {
+  self.setCurrent = function() {
+    $("#thumbnails .slide").removeClass("current");
     $thumb = $("#thumbnails .slide").eq($("#slides .slide").index($("#slides .slide.current")));
     $thumb.addClass("current");
-  },
+  };
 };
 
-Sections = {
-  setup: function() {
+function Sections(podium_reference) {
+  var self = this;
+  self.podium = podium_reference;
+
+  self.initialize = function() {
     $('<div id="sections"><h2>Sections:</h1><ol></ol></div>').appendTo("body");
 
     $("#slides .slide").each(function(){ 
@@ -136,29 +160,37 @@ Sections = {
     $('#sections .section').hover(function() { $(this).addClass("hover")   }, 
                                   function() { $(this).removeClass("hover")});
     $('#sections .section').click(function() { 
-      Slides.focus($("#slides .slide#" + $(this).attr('rel')));
-      Sections.toggle();
+      self.podium.slides.focus($("#slides .slide#" + $(this).attr('rel')));
+      self.toggle();
     });
 
-    Sections.toggle();
-  },
+    self.toggle();
+  };
 
-  toggle: function() {
+  self.toggle = function() {
     if ($('#sections').is(':visible')) {
-      Slides.show();
+      self.podium.slides.show();
     } else {
-      Podium.hideAll();
+      self.podium.hideAll();
       $('#sections').show();
     }
-  },
+  };
 
-  setCurrent: function() {
+  self.setCurrent = function() {
+    $("#sections .section").removeClass("current");
     $slide = $("#slides .slide.current");
     if ($slide.attr("id")) {
       $section = $("#sections .section[rel='" + $slide.attr("id") + "']");
       $section.addClass("current");
     }
-  },
-
+  };
 };
 
+function Notes(podium_reference) {
+  var self = this;
+  self.podium = podium_reference;
+
+  self.initialize = function() {
+    // var notes_window = window.open("http://google.com", "podium-notes");
+  };
+};
