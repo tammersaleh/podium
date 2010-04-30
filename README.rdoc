@@ -1,6 +1,6 @@
-= podium
+= Podium
 
-Description goes here.
+A Haml backed presentation system.
 
 == Note on Patches/Pull Requests
  
@@ -14,4 +14,4 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2010 tsaleh. See LICENSE for details.
+Copyright (c) 2010 Tammer Saleh. See LICENSE for details.

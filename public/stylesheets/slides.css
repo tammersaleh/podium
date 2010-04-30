@@ -1,26 +1,3 @@
-#slides {
-  margin: 0;
-  padding: 0;
-  width: 1020px;
-  height: 740px;
-  margin-left: auto;
-  margin-right: auto;
-  overflow: hidden;
-}
-
-#slides .slide {
-  display: none;
-  border: 1px solid #fff;
-}
-
-#slides .slide.current {
-  display: block;
-}
-
-.inc {
-  display: none;
-}
-
 body {
   font-family: "Gill Sans", Helvetica, Arial, sans-serif;
   padding: 0;
@@ -28,50 +5,40 @@ body {
   border: 0;
 }
 
-img {
+#slides {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#slides .slide {
+  display: none;
+}
+
+#slides .slide.current {
+  display: block;
+}
+
+.inc {
+  opacity: 0;
+}
+
+.slide img {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-ul {
+.slide ul {
   display: block;
-  height: 600px;
   font-size: 3em;
   list-style: none;
   margin-left: 0;
   padding-left: 1em;
   text-indent: -1em;
 }
-ul li {
-  text-align: center;
-  padding: 25px;
-}
 
-ul.small {
-  font-size: 2em;
-}
-ul.small li {
-  padding: 10px;
-}
-
-.commandline pre {
-  font-size: 2em;
-}
-.commandline code.command {
-  color: #000;
-}
-.commandline code.result {
-  color: #444;
-}
-
-h1.command {
-  white-space: pre;
-  font-family: monospace;
-  font-size: 3em;
-}
-
-.code {
+.slide .code {
   white-space: pre;
   font-family: monospace;
 }
@@ -84,36 +51,33 @@ h1.command {
   font-size: 60%;
 }
 
-blockquote {
-  font-size: 2em;
-  font-style: italic;
-  padding: 1em;
-  -webkit-border-radius: 10px;
-  -webkit-box-shadow: 0 0 15px gray;
-  border: 2px solid gray;
+.tiny {
+  font-size: 30%
 }
 
-h1 {
+.slide h1 {
   font-size: 5em;
   font-weight: normal;
   text-align: center;
 }
 
-h2 {
+.slide h2 {
   font-size: 3em;
   font-weight: normal;
   text-align: center;
 }
 
-h3 {
+.slide h3 {
   font-size: 2em;
   font-weight: normal;
   text-align: center;
 }
 
-pre {
-  padding: 1em;
+.slide pre {
+  padding: 0.5em;
   font-size: 2.8em;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
 }
 
 .hidden {
@@ -125,35 +89,19 @@ pre {
   overflow: hidden;
 }
 
-.results {
-  background-color: #002200;
-  color: #00AA00;
-  font-size: 2em;
-  border: 2px solid black;
-  position: fixed;
-  top: 0px;
-  width: 100%;
-  padding: 15px;
-  margin: 0px;
-  font-family: monospace;
-}
-
-.executing {
-  color: #0000FF !important;
-  background-color: yellow;
-}
-
-table {
+.slide table {
   font-size: 2em;
   margin-left: auto;
   margin-right: auto;
 }
-table th {
+
+.slide table th {
   text-align: left;
   padding-right: 2em;
   vertical-align: top;
 }
-table td {
+
+.slide table td {
   padding-right: 2em;
   vertical-align: top;
 }
@@ -175,7 +123,9 @@ table td {
   overflow: hidden;
   border: 1px solid grey;
   margin: 1px;
+  -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
+  -moz-box-shadow: 0 0 5px gray;
   -webkit-box-shadow: 0 0 5px gray;
 }
 
@@ -184,10 +134,11 @@ table td {
   margin: 0px;
 }
 
-#thumbnails .hover {
+#thumbnails .slide:hover {
   border: 2px solid black;
   margin: 0px;
   -webkit-box-shadow: 0 0 20px black;
+  -moz-box-shadow: 0 0 20px black;
 }
 
 #thumbnails .slide * {
@@ -201,23 +152,57 @@ table td {
 }
 
 #thumbnails .inc {
-  display: block;
+  opacity: 1;
 }
 
 /* Sections */
 
 #sections {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
   font-size: 2em;
   list-style: none;
 }
 
-#sections .hover {
-  background: yellow;
+#sections li[rel]:hover {
+  color: yellow;
 }
 
 #sections .current {
   font-weight: bold;
+}
+
+/* Help */
+
+#help {
+  z-index: 3;
+  position: absolute;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  width: 80%;
+  display: hidden;
+  border: 1px solid yellow;
+  background: rgba(0, 0, 0, 0.8);
+  font-size: 3em;
+  font-family: Helvetica;
+}
+
+#help table {
+  margin: 10% auto;
+}
+
+#help table th, #help table td {
+  vertical-align: top;
+  padding: 5px 20px;
+}
+
+#help table th {
+  color: yellow;
+  font-weight: bold;
+  text-align: right;
+}
+
+#help table td {
+  text-align: left;
 }

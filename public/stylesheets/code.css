@@ -22,3 +22,6 @@ pre code .string {
   font-style: italic; 
   color: #55FF55;
 }
+pre code .embedded {
+  color: yellow;
+}

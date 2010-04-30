@@ -1,32 +1,16 @@
-module Podium
-  module Helpers
-    def ts
-      Time.now.to_i
-    end
-
-    def css(name)
-      "<link href='assets/#{name}.css?#{ts}' media='all' rel='stylesheet' type='text/css'>"
-    end
-
-    def javascript(name)
-      "<script src='assets/#{name}.js?#{ts}' type='text/javascript'></script>"
-    end
-
-    def image(name, opts = {})
-      attributes = opts.map {|k,v| "#{k}='#{v}'"}.join(' ')
-      "<img src='assets/#{name}' #{attributes}/>"
-    end
-
-    def podium_css(name)
-      "<link href='podium/css/#{name}.css?#{ts}' media='all' rel='stylesheet' type='text/css'>"
-    end
-
-    def podium_javascript(name)
-      "<script src='podium/javascript/#{name}.js?#{ts}' type='text/javascript'></script>"
-    end
-
-    def render(filename, &block)
-      Haml::Engine.new(File.read(filename + ".html.haml")).render(binding, &block)
+module Podium::Helpers
+  def partial(template, *args)
+    template_array = template.to_s.split('/')
+    template = template_array[0..-2].join('/') + "/_#{template_array[-1]}"
+    options = args.last.is_a?(Hash) ? args.pop : {}
+    options.merge!(:layout => false)
+    if collection = options.delete(:collection) then
+      collection.inject([]) do |buffer, member|
+        buffer << haml(:"#{template}", options.merge(:layout => false, 
+                                                     :locals => {template_array[-1].to_sym => member}))
+      end.join("\n")
+    else
+      haml(:"#{template}", options)
     end
   end
 end
