@@ -11,8 +11,8 @@ begin
     gem.homepage = "http://github.com/tsaleh/podium"
     gem.authors = ["tsaleh"]
     gem.add_dependency 'haml',                  '~> 2.2.0'
-    gem.add_dependency 'sinatra',               '~> 0.9.0'
-    gem.add_dependency 'sinatra-static-assets', '~> 0.5.0'
+    gem.add_dependency 'sinatra',               '>= 0.9.0'
+    gem.add_dependency 'sinatra-static-assets', '>= 0.5.0'
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

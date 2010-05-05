@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{podium}
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["tsaleh"]
-  s.date = %q{2010-04-29}
+  s.date = %q{2010-05-05}
   s.description = %q{Haml and JS based presentation system.}
   s.email = %q{tsaleh@gmail.com}
   s.extra_rdoc_files = [
@@ -87,17 +87,17 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<haml>, ["~> 2.2.0"])
-      s.add_runtime_dependency(%q<sinatra>, ["~> 0.9.0"])
-      s.add_runtime_dependency(%q<sinatra-static-assets>, ["~> 0.5.0"])
+      s.add_runtime_dependency(%q<sinatra>, [">= 0.9.0"])
+      s.add_runtime_dependency(%q<sinatra-static-assets>, [">= 0.5.0"])
     else
       s.add_dependency(%q<haml>, ["~> 2.2.0"])
-      s.add_dependency(%q<sinatra>, ["~> 0.9.0"])
-      s.add_dependency(%q<sinatra-static-assets>, ["~> 0.5.0"])
+      s.add_dependency(%q<sinatra>, [">= 0.9.0"])
+      s.add_dependency(%q<sinatra-static-assets>, [">= 0.5.0"])
     end
   else
     s.add_dependency(%q<haml>, ["~> 2.2.0"])
-    s.add_dependency(%q<sinatra>, ["~> 0.9.0"])
-    s.add_dependency(%q<sinatra-static-assets>, ["~> 0.5.0"])
+    s.add_dependency(%q<sinatra>, [">= 0.9.0"])
+    s.add_dependency(%q<sinatra-static-assets>, [">= 0.5.0"])
   end
 end
 
