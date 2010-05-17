@@ -70,7 +70,6 @@ Gem::Specification.new do |s|
      "public/stylesheets/blueprint/src/reset.css",
      "public/stylesheets/blueprint/src/typography.css",
      "public/stylesheets/code.css",
-     "public/stylesheets/local.css",
      "public/stylesheets/slides.css",
      "views/layout.haml"
   ]

@@ -13,6 +13,7 @@ body {
 
 #slides .slide {
   display: none;
+  overflow: hidden;
 }
 
 #slides .slide.current {

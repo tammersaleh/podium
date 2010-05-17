@@ -65,7 +65,6 @@ function Help(podium_reference) {
 self.Key = function(keyCode) {
   var self = this;
   self.key = keyCode;
-  log(keyCode);
 
   self.is_next = function() {
     return(self.key == 32 || self.key == 34 || self.key == 39 || self.key == 40)
