@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{podium}
-  s.version = "0.3.1"
+  s.version = "0.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["tsaleh"]
-  s.date = %q{2010-05-05}
+  s.date = %q{2010-05-16}
   s.description = %q{Haml and JS based presentation system.}
   s.email = %q{tsaleh@gmail.com}
   s.extra_rdoc_files = [
@@ -39,7 +39,6 @@ Gem::Specification.new do |s|
      "public/javascripts/code_highlighter/test.html",
      "public/javascripts/jquery-1.4.1.js",
      "public/javascripts/jquery-ui-1.8.js",
-     "public/javascripts/local.js",
      "public/javascripts/slides.js",
      "public/stylesheets/blueprint/ie.css",
      "public/stylesheets/blueprint/plugins/buttons/icons/cross.png",

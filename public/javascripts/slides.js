@@ -3,6 +3,12 @@ $(function() {
   podium.initialize();
 });
 
+function log(msg) {
+  if (typeof(console) != "undefined") {
+    console.log(msg);
+  };
+};
+
 function Podium() {
   var self = this;
   self.initialize = function() {
@@ -59,13 +65,13 @@ function Help(podium_reference) {
 self.Key = function(keyCode) {
   var self = this;
   self.key = keyCode;
-  console.log(keyCode);
+  log(keyCode);
 
   self.is_next = function() {
-    return(self.key == 32 || self.key == 39 || self.key == 40)
+    return(self.key == 32 || self.key == 34 || self.key == 39 || self.key == 40)
   };
   self.is_prev = function() { 
-    return(self.key == 37 || self.key == 38)
+    return(self.key == 33 || self.key == 37 || self.key == 38)
   };
   self.want_thumbnails = function() { 
     return(self.key == 67)
